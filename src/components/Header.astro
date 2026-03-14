@@ -1,0 +1,142 @@
+---
+
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="brand">
+      <a href="/" class="brand-logo">
+        <span class="brand-mark">R</span>
+        <span class="brand-name">Routesider</span>
+      </a>
+      <span class="brand-tagline">Shipping Infrastructure Consulting</span>
+    </div>
+    <nav class="header-nav">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#book" class="btn btn-primary">Book Free Consultation</a>
+    </nav>
+    <button class="mobile-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--header-height);
+    background-color: var(--postal-navy);
+    border-bottom: 3px solid var(--envelope-tan);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--caution-yellow);
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+
+  .brand-name {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--pure-white);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .brand-tagline {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--envelope-tan);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-left: 1px solid rgba(196, 164, 108, 0.4);
+    padding-left: var(--space-sm);
+  }
+
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .nav-link {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: var(--pure-white);
+  }
+
+  .header-nav .btn {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.4rem;
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .mobile-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--pure-white);
+    transition: all 0.3s;
+  }
+
+  @media (max-width: 768px) {
+    .brand-tagline {
+      display: none;
+    }
+
+    .header-nav {
+      display: none;
+    }
+
+    .mobile-toggle {
+      display: flex;
+    }
+  }
+</style>

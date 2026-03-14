@@ -1,0 +1,280 @@
+---
+const services = [
+  {
+    id: "01",
+    title: "Shipping Software Setup & Configuration",
+    desc: "Full platform setup for ShipStation, ShipWorks, and Stamps.com — configured correctly the first time so you can start shipping immediately.",
+  },
+  {
+    id: "02",
+    title: "Label Generation & Print Failures",
+    desc: "Diagnosing and resolving label creation errors, thermal printer driver conflicts, Windows spooler issues, and print alignment problems.",
+  },
+  {
+    id: "03",
+    title: "Order Import & Sync Troubleshooting",
+    desc: "Fixing order ingestion failures between your e-commerce store and shipping platform so every order flows through without manual intervention.",
+  },
+  {
+    id: "04",
+    title: "Carrier Rate & API Issues",
+    desc: "Resolving carrier rate calculation failures, API communication errors, and authentication issues that block label purchases.",
+  },
+  {
+    id: "05",
+    title: "Workstation & Network Setup",
+    desc: "Configuring shipping workstations, multi-user environments, database connectivity, and ODBC issues that silently break shipping workflows.",
+  },
+  {
+    id: "06",
+    title: "Automation & Workflow Repair",
+    desc: "Untangling shipping automation rule conflicts and restoring the workflow logic that keeps your fulfillment pipeline running at peak performance.",
+  },
+];
+---
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label">
+        <span class="label-line"></span>
+        Services
+      </div>
+      <h2 class="services-title">What I Diagnose<br />& Resolve</h2>
+      <p class="services-intro">
+        Whether it's a single workstation or a multi-station warehouse,
+        I identify the root cause quickly and restore your full
+        order-processing workflow.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      {services.map((service) => (
+        <article class="service-card">
+          <div class="service-id">{service.id}</div>
+          <h3 class="service-title">{service.title}</h3>
+          <p class="service-desc">{service.desc}</p>
+          <div class="service-border"></div>
+        </article>
+      ))}
+    </div>
+
+    <div class="services-cta" id="book">
+      <div class="cta-inner">
+        <div class="cta-stamp">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="cta-text">
+          <h3>Ready to Fix Your Shipping?</h3>
+          <p>Book a free consultation — I'll assess your environment and tell you exactly what's going wrong and how to fix it.</p>
+        </div>
+        <a href="#book" class="btn btn-primary">
+          Book Free Consultation
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    padding: var(--space-2xl) 0;
+    background-color: var(--paper-white);
+    position: relative;
+  }
+
+  /* Subtle stamp/postmark watermark */
+  .services::before {
+    content: '';
+    position: absolute;
+    top: 3rem;
+    right: 5%;
+    width: 200px;
+    height: 200px;
+    border: 3px solid rgba(196, 164, 108, 0.08);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .services::after {
+    content: '';
+    position: absolute;
+    top: 3.5rem;
+    right: calc(5% + 10px);
+    width: 180px;
+    height: 180px;
+    border: 1px solid rgba(196, 164, 108, 0.06);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .services-header {
+    margin-bottom: var(--space-xl);
+    max-width: 540px;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--envelope-tan);
+    margin-bottom: var(--space-sm);
+  }
+
+  .label-line {
+    display: block;
+    width: 2rem;
+    height: 2px;
+    background-color: var(--envelope-tan);
+  }
+
+  .services-title {
+    margin-bottom: var(--space-sm);
+  }
+
+  .services-intro {
+    color: var(--muted-text);
+    line-height: 1.7;
+  }
+
+  /* --- Card Grid --- */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background-color: var(--form-gray);
+    border: 1px solid var(--form-gray);
+    margin-bottom: var(--space-xl);
+  }
+
+  .service-card {
+    background-color: var(--pure-white);
+    padding: var(--space-lg);
+    position: relative;
+    transition: background-color 0.2s;
+  }
+
+  .service-card:hover {
+    background-color: rgba(0, 40, 104, 0.02);
+  }
+
+  .service-id {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: rgba(196, 164, 108, 0.25);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .service-title {
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+    color: var(--postal-navy);
+    margin-bottom: 0.65rem;
+    line-height: 1.15;
+  }
+
+  .service-desc {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--muted-text);
+  }
+
+  .service-border {
+    position: absolute;
+    bottom: 0;
+    left: var(--space-lg);
+    right: var(--space-lg);
+    height: 2px;
+    background-color: transparent;
+    transition: background-color 0.2s;
+  }
+
+  .service-card:hover .service-border {
+    background-color: var(--caution-yellow);
+  }
+
+  /* --- CTA Banner --- */
+  .services-cta {
+    position: relative;
+  }
+
+  .cta-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    background-color: var(--postal-navy);
+    padding: var(--space-lg) var(--space-xl);
+    border-left: 4px solid var(--caution-yellow);
+  }
+
+  .cta-stamp {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--envelope-tan);
+    border-radius: 50%;
+    color: var(--envelope-tan);
+  }
+
+  .cta-text {
+    flex: 1;
+  }
+
+  .cta-text h3 {
+    color: var(--pure-white);
+    font-size: 1.5rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .cta-text p {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .services-cta .btn {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: var(--space-lg);
+    }
+
+    .cta-stamp {
+      display: none;
+    }
+
+    .services-cta .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

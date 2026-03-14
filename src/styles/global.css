@@ -1,0 +1,156 @@
+/* ============================================
+   ROUTESIDER — Design System & Global Styles
+   ============================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap');
+
+/* --- Design Tokens --- */
+:root {
+  /* Primary */
+  --federal-blue: #002868;
+  --postal-navy: #0A1628;
+
+  /* Accents */
+  --envelope-tan: #C4A46C;
+  --cardboard-brown: #8B6F47;
+  --caution-yellow: #FFB800;
+  --safety-orange: #E8600A;
+
+  /* Neutrals */
+  --paper-white: #F5F3ED;
+  --pure-white: #FFFFFF;
+  --ink-black: #1A1A1A;
+  --form-gray: #D1CEC6;
+  --muted-text: #5A5A5A;
+
+  /* Typography */
+  --font-heading: 'Bebas Neue', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Spacing scale */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+
+  /* Layout */
+  --max-width: 1200px;
+  --header-height: 72px;
+
+  /* Borders */
+  --border-rule: 1px solid var(--form-gray);
+  --border-accent: 2px solid var(--envelope-tan);
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--ink-black);
+  background-color: var(--paper-white);
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 400; /* Bebas Neue only has 400 */
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--postal-navy);
+}
+
+h1 { font-size: clamp(3rem, 6vw, 5.5rem); }
+h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); }
+
+p {
+  font-size: 1.05rem;
+  max-width: 65ch;
+}
+
+/* --- Utility --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 2rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--caution-yellow);
+  color: var(--postal-navy);
+}
+
+.btn-primary:hover {
+  background-color: var(--safety-orange);
+  color: var(--pure-white);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--federal-blue);
+  border: 2px solid var(--federal-blue);
+}
+
+.btn-outline:hover {
+  background-color: var(--federal-blue);
+  color: var(--pure-white);
+}
+
+/* --- Form-paper background texture --- */
+.form-paper {
+  background-color: var(--pure-white);
+  background-image:
+    linear-gradient(var(--form-gray) 1px, transparent 1px);
+  background-size: 100% 2.5rem;
+  background-position: 0 1.25rem;
+}
+
+/* --- Section shared --- */
+section {
+  position: relative;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  :root {
+    --space-xl: 3rem;
+    --space-2xl: 4rem;
+  }
+}

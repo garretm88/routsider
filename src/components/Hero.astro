@@ -1,0 +1,244 @@
+---
+
+---
+
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="container hero-inner">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Trusted by U.S. E-Commerce Merchants
+    </div>
+
+    <h1 class="hero-title">
+      Your Shipping<br />
+      <span class="hero-title-accent">Stops Breaking</span><br />
+      Here.
+    </h1>
+
+    <p class="hero-sub">
+      I diagnose, repair, and optimize the shipping infrastructure behind
+      e-commerce operations — so orders move out the door without delays.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#book" class="btn btn-primary">
+        Book a Free Consultation
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#services" class="btn btn-outline">See How I Help</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-number">4+</span>
+        <span class="stat-label">Years of Daily<br />Troubleshooting</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-number">3</span>
+        <span class="stat-label">Major Platforms<br />Mastered</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Focused on Shipping<br />Infrastructure</span>
+      </div>
+    </div>
+
+    <div class="hero-platforms">
+      <span class="platforms-label">Platforms:</span>
+      <span class="platform-tag">ShipStation</span>
+      <span class="platform-tag">ShipWorks</span>
+      <span class="platform-tag">Stamps.com</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding: calc(var(--header-height) + var(--space-2xl)) 0 var(--space-2xl);
+    background-color: var(--pure-white);
+    overflow: hidden;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Subtle grid-paper background */
+  .hero-bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(209, 206, 198, 0.25) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(209, 206, 198, 0.25) 1px, transparent 1px);
+    background-size: 2.5rem 2.5rem;
+    pointer-events: none;
+  }
+
+  /* Vertical red margin line like ruled paper */
+  .hero-bg-pattern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: max(calc((100vw - var(--max-width)) / 2 + var(--space-md) - 1rem), 2rem);
+    width: 2px;
+    background-color: rgba(200, 60, 60, 0.12);
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--federal-blue);
+    background-color: rgba(0, 40, 104, 0.06);
+    border: 1px solid rgba(0, 40, 104, 0.15);
+    padding: 0.5rem 1rem;
+    margin-bottom: var(--space-lg);
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .hero-title {
+    margin-bottom: var(--space-md);
+    color: var(--postal-navy);
+  }
+
+  .hero-title-accent {
+    color: var(--federal-blue);
+    position: relative;
+  }
+
+  .hero-title-accent::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0.08em;
+    width: 100%;
+    height: 0.12em;
+    background-color: var(--caution-yellow);
+    z-index: -1;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--muted-text);
+    margin-bottom: var(--space-lg);
+    max-width: 55ch;
+  }
+
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-md) 0;
+    border-top: var(--border-rule);
+    border-bottom: var(--border-rule);
+    margin-bottom: var(--space-md);
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .stat-number {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: var(--federal-blue);
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    line-height: 1.35;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 3rem;
+    background-color: var(--form-gray);
+  }
+
+  .hero-platforms {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+  }
+
+  .platforms-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted-text);
+  }
+
+  .platform-tag {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--cardboard-brown);
+    background-color: rgba(139, 111, 71, 0.08);
+    border: 1px solid rgba(139, 111, 71, 0.2);
+    padding: 0.3rem 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      min-height: auto;
+      padding: calc(var(--header-height) + var(--space-xl)) 0 var(--space-xl);
+    }
+
+    .hero-stats {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-sm);
+    }
+
+    .stat-divider {
+      width: 3rem;
+      height: 1px;
+    }
+
+    .hero-cta .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
