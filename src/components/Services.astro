@@ -1,32 +1,46 @@
 ---
+import ServiceScene from './services/ServiceScene.astro';
+
 const services = [
   {
     id: "01",
+    scene: "setup",
+    visualTag: "Config Stack",
     title: "Shipping Software Setup & Configuration",
     desc: "Full platform setup for ShipStation, ShipWorks, and Stamps.com — configured correctly the first time so you can start shipping immediately.",
   },
   {
     id: "02",
+    scene: "printer",
+    visualTag: "Print Engine",
     title: "Label Generation & Print Failures",
     desc: "Diagnosing and resolving label creation errors, thermal printer driver conflicts, Windows spooler issues, and print alignment problems.",
   },
   {
     id: "03",
+    scene: "sync",
+    visualTag: "Order Mesh",
     title: "Order Import & Sync Troubleshooting",
     desc: "Fixing order ingestion failures between your e-commerce store and shipping platform so every order flows through without manual intervention.",
   },
   {
     id: "04",
+    scene: "rates",
+    visualTag: "Carrier Signals",
     title: "Carrier Rate & API Issues",
     desc: "Resolving carrier rate calculation failures, API communication errors, and authentication issues that block label purchases.",
   },
   {
     id: "05",
+    scene: "network",
+    visualTag: "Warehouse Link",
     title: "Workstation & Network Setup",
     desc: "Configuring shipping workstations, multi-user environments, database connectivity, and ODBC issues that silently break shipping workflows.",
   },
   {
     id: "06",
+    scene: "automation",
+    visualTag: "Workflow Rails",
     title: "Automation & Workflow Repair",
     desc: "Untangling shipping automation rule conflicts and restoring the workflow logic that keeps your fulfillment pipeline running at peak performance.",
   },
@@ -51,9 +65,15 @@ const services = [
     <div class="services-grid">
       {services.map((service) => (
         <article class="service-card">
-          <div class="service-id">{service.id}</div>
-          <h3 class="service-title">{service.title}</h3>
-          <p class="service-desc">{service.desc}</p>
+          <div class="service-meta">
+            <div class="service-id">{service.id}</div>
+            <div class="service-tag">{service.visualTag}</div>
+          </div>
+          <ServiceScene scene={service.scene} title={service.title} />
+          <div class="service-copy">
+            <h3 class="service-title">{service.title}</h3>
+            <p class="service-desc">{service.desc}</p>
+          </div>
           <div class="service-border"></div>
         </article>
       ))}
@@ -159,29 +179,77 @@ const services = [
   }
 
   .service-card {
-    background-color: var(--pure-white);
-    padding: var(--space-lg);
+    display: grid;
+    gap: 1rem;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 243, 237, 0.92)),
+      var(--pure-white);
+    padding: 1.1rem;
     position: relative;
-    transition: background-color 0.2s;
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform 0.22s ease, background-color 0.22s ease, box-shadow 0.22s ease;
   }
 
   .service-card:hover {
     background-color: rgba(0, 40, 104, 0.02);
+    transform: translateY(-4px);
+    box-shadow: 0 24px 38px rgba(10, 22, 40, 0.08);
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at top left, rgba(255, 184, 0, 0.12), transparent 30%),
+      linear-gradient(180deg, transparent 45%, rgba(0, 40, 104, 0.03));
+    opacity: 0;
+    transition: opacity 0.22s ease;
+    pointer-events: none;
+  }
+
+  .service-card:hover::before {
+    opacity: 1;
+  }
+
+  .service-meta {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .service-tag {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--federal-blue);
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(0, 40, 104, 0.12);
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.74);
   }
 
   .service-id {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: rgba(196, 164, 108, 0.25);
     line-height: 1;
     letter-spacing: 0.04em;
-    margin-bottom: var(--space-sm);
+  }
+
+  .service-copy {
+    display: grid;
+    gap: 0.6rem;
+    padding: 0 0.4rem 1rem;
   }
 
   .service-title {
     font-size: clamp(1.1rem, 1.5vw, 1.4rem);
     color: var(--postal-navy);
-    margin-bottom: 0.65rem;
     line-height: 1.15;
   }
 
@@ -189,13 +257,14 @@ const services = [
     font-size: 0.9rem;
     line-height: 1.65;
     color: var(--muted-text);
+    max-width: none;
   }
 
   .service-border {
     position: absolute;
     bottom: 0;
-    left: var(--space-lg);
-    right: var(--space-lg);
+    left: 1.1rem;
+    right: 1.1rem;
     height: 2px;
     background-color: transparent;
     transition: background-color 0.2s;
@@ -260,6 +329,23 @@ const services = [
   @media (max-width: 768px) {
     .services-grid {
       grid-template-columns: 1fr;
+    }
+
+    .service-card {
+      padding: 0.9rem;
+    }
+
+    .service-meta {
+      align-items: center;
+    }
+
+    .service-tag {
+      font-size: 0.65rem;
+      padding: 0.45rem 0.6rem;
+    }
+
+    .service-copy {
+      padding: 0 0.15rem 0.85rem;
     }
 
     .cta-inner {

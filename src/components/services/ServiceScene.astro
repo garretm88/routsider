@@ -1,0 +1,104 @@
+---
+interface Props {
+  scene: string;
+  title: string;
+}
+
+const { scene, title } = Astro.props;
+---
+
+<service-scene class="service-scene" data-scene={scene} aria-label={`${title} animated diagram`}>
+  <canvas class="service-scene-canvas" aria-hidden="true"></canvas>
+  <div class="service-scene-overlay" aria-hidden="true">
+    <span class="service-scene-bloom"></span>
+    <span class="service-scene-grid"></span>
+  </div>
+</service-scene>
+
+<script>
+  import { defineServiceSceneElement } from '../../lib/service-scenes';
+
+  defineServiceSceneElement();
+</script>
+
+<style>
+  service-scene {
+    display: block;
+  }
+
+  .service-scene {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    overflow: hidden;
+    border: 1px solid rgba(10, 22, 40, 0.1);
+    border-radius: 1.2rem;
+    background:
+      radial-gradient(circle at 18% 18%, rgba(255, 184, 0, 0.28), transparent 28%),
+      radial-gradient(circle at 78% 26%, rgba(232, 96, 10, 0.22), transparent 24%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(245, 243, 237, 0.98));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 -18px 48px rgba(0, 40, 104, 0.08),
+      0 18px 36px rgba(10, 22, 40, 0.08);
+    contain: layout paint size;
+    transform: translateZ(0);
+  }
+
+  .service-scene::before,
+  .service-scene::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .service-scene::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.45), transparent 42%);
+    mix-blend-mode: screen;
+  }
+
+  .service-scene::after {
+    inset: 0.75rem;
+    border: 1px solid rgba(196, 164, 108, 0.18);
+    border-radius: 0.95rem;
+  }
+
+  .service-scene-canvas,
+  .service-scene-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .service-scene-canvas {
+    display: block;
+  }
+
+  .service-scene-overlay {
+    pointer-events: none;
+  }
+
+  .service-scene-bloom,
+  .service-scene-grid {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .service-scene-bloom {
+    background:
+      radial-gradient(circle at 50% 72%, rgba(0, 40, 104, 0.14), transparent 32%),
+      radial-gradient(circle at 26% 30%, rgba(196, 164, 108, 0.22), transparent 20%),
+      radial-gradient(circle at 82% 18%, rgba(255, 184, 0, 0.12), transparent 14%);
+  }
+
+  .service-scene-grid {
+    background-image:
+      linear-gradient(rgba(10, 22, 40, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10, 22, 40, 0.05) 1px, transparent 1px);
+    background-size: 100% 1.3rem, 1.3rem 100%;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.28), transparent 80%);
+  }
+</style>

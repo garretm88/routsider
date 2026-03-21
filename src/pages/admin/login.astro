@@ -1,0 +1,227 @@
+---
+export const prerender = false;
+
+import { countUsers } from '../../lib/auth';
+import '../../styles/global.css';
+
+const userCount = await countUsers();
+const isBootstrap = userCount === 0;
+
+const error = Astro.url.searchParams.get('error');
+const registered = Astro.url.searchParams.get('registered');
+
+let errorMsg = '';
+if (error === 'invalid') errorMsg = 'Invalid email or password.';
+if (error === 'validation') errorMsg = 'Please fill in all fields. Password must be at least 8 characters.';
+if (error === 'exists') errorMsg = 'A user with that email already exists.';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{isBootstrap ? 'Create Admin Account' : 'Admin Login'} — Routesider</title>
+  </head>
+  <body class="admin-body">
+    <div class="admin-shell">
+      <a href="/" class="admin-brand">
+        <span class="brand-mark">R</span>
+        <span class="brand-name">Routesider</span>
+      </a>
+
+      <div class="admin-card">
+        {isBootstrap ? (
+          <Fragment>
+            <h1 class="admin-title">Create Admin Account</h1>
+            <p class="admin-sub">No admin users exist yet. Create the first account to get started.</p>
+
+            {errorMsg && <div class="admin-error">{errorMsg}</div>}
+
+            <form method="POST" action="/api/auth/register" class="admin-form">
+              <label class="admin-label">
+                <span>Name</span>
+                <input type="text" name="name" required autocomplete="name" class="admin-input" />
+              </label>
+              <label class="admin-label">
+                <span>Email</span>
+                <input type="email" name="email" required autocomplete="email" class="admin-input" />
+              </label>
+              <label class="admin-label">
+                <span>Password</span>
+                <input type="password" name="password" required minlength="8" autocomplete="new-password" class="admin-input" />
+              </label>
+              <button type="submit" class="btn btn-primary admin-submit">Create Account</button>
+            </form>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <h1 class="admin-title">Admin Login</h1>
+
+            {registered && <div class="admin-success">Account created. Please log in.</div>}
+            {errorMsg && <div class="admin-error">{errorMsg}</div>}
+
+            <form method="POST" action="/api/auth/login" class="admin-form">
+              <label class="admin-label">
+                <span>Email</span>
+                <input type="email" name="email" required autocomplete="email" class="admin-input" />
+              </label>
+              <label class="admin-label">
+                <span>Password</span>
+                <input type="password" name="password" required autocomplete="current-password" class="admin-input" />
+              </label>
+              <button type="submit" class="btn btn-primary admin-submit">Log In</button>
+            </form>
+          </Fragment>
+        )}
+      </div>
+
+      <p class="admin-footer">
+        <a href="/">← Back to site</a>
+      </p>
+    </div>
+  </body>
+</html>
+
+<style>
+  .admin-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--postal-navy);
+    background-image:
+      radial-gradient(ellipse at 30% 20%, rgba(0, 40, 104, 0.4), transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(196, 164, 108, 0.08), transparent 50%);
+  }
+
+  .admin-shell {
+    width: 100%;
+    max-width: 420px;
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .admin-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    text-decoration: none;
+  }
+
+  .admin-brand .brand-mark {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--caution-yellow);
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+
+  .admin-brand .brand-name {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--pure-white);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .admin-card {
+    width: 100%;
+    background-color: var(--pure-white);
+    border-radius: 0.75rem;
+    padding: var(--space-lg);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(196, 164, 108, 0.15);
+  }
+
+  .admin-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--postal-navy);
+    margin-bottom: var(--space-xs);
+  }
+
+  .admin-sub {
+    font-size: 0.9rem;
+    color: var(--muted-text);
+    margin-bottom: var(--space-md);
+    line-height: 1.5;
+  }
+
+  .admin-error {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    font-size: 0.875rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: 0.4rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .admin-success {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    font-size: 0.875rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: 0.4rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .admin-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--postal-navy);
+    letter-spacing: 0.02em;
+  }
+
+  .admin-input {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--form-gray);
+    border-radius: 0.4rem;
+    background-color: var(--paper-white);
+    color: var(--ink-black);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .admin-input:focus {
+    outline: none;
+    border-color: var(--federal-blue);
+    box-shadow: 0 0 0 3px rgba(0, 40, 104, 0.12);
+  }
+
+  .admin-submit {
+    margin-top: var(--space-xs);
+    width: 100%;
+    justify-content: center;
+  }
+
+  .admin-footer {
+    font-size: 0.8rem;
+  }
+
+  .admin-footer a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .admin-footer a:hover {
+    color: var(--pure-white);
+  }
+</style>

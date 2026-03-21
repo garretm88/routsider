@@ -24,3 +24,8 @@ pnpm-debug.log*
 .idea/
 .wrangler/
 .vercel
+
+# tooling
+.autoclaude/
+.claude/
+.claude_agent_farm_backups/

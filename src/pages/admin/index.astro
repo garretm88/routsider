@@ -1,0 +1,221 @@
+---
+export const prerender = false;
+
+import '../../styles/global.css';
+
+const user = Astro.locals.user!;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin Dashboard — Routesider</title>
+  </head>
+  <body class="admin-body">
+    <div class="admin-shell">
+      <header class="dash-header">
+        <a href="/" class="admin-brand">
+          <span class="brand-mark">R</span>
+          <span class="brand-name">Routesider</span>
+        </a>
+        <div class="dash-user">
+          <span class="dash-user-name">{user.name}</span>
+          <form method="POST" action="/api/auth/logout">
+            <button type="submit" class="dash-logout">Log Out</button>
+          </form>
+        </div>
+      </header>
+
+      <main class="dash-main">
+        <div class="dash-card">
+          <h1 class="dash-title">Welcome, {user.name}</h1>
+          <p class="dash-sub">
+            You're logged in as <strong>{user.email}</strong>. This admin dashboard is a foundation for back-end features.
+          </p>
+
+          <div class="dash-meta">
+            <div class="dash-meta-item">
+              <span class="dash-meta-label">User ID</span>
+              <code class="dash-meta-value">{user.id}</code>
+            </div>
+            <div class="dash-meta-item">
+              <span class="dash-meta-label">Account Created</span>
+              <span class="dash-meta-value">{new Date(user.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <p class="admin-footer">
+        <a href="/">← Back to site</a>
+      </p>
+    </div>
+  </body>
+</html>
+
+<style>
+  .admin-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: var(--postal-navy);
+    background-image:
+      radial-gradient(ellipse at 30% 20%, rgba(0, 40, 104, 0.4), transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(196, 164, 108, 0.08), transparent 50%);
+    padding-top: var(--space-xl);
+  }
+
+  .admin-shell {
+    width: 100%;
+    max-width: 640px;
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .dash-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .admin-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    text-decoration: none;
+  }
+
+  .admin-brand .brand-mark {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--caution-yellow);
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+
+  .admin-brand .brand-name {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--pure-white);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .dash-user {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .dash-user-name {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .dash-logout {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pure-white);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.4rem 0.9rem;
+    border-radius: 0.35rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .dash-logout:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .dash-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .dash-card {
+    background-color: var(--pure-white);
+    border-radius: 0.75rem;
+    padding: var(--space-lg);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(196, 164, 108, 0.15);
+  }
+
+  .dash-title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--postal-navy);
+    margin-bottom: var(--space-xs);
+  }
+
+  .dash-sub {
+    font-size: 0.95rem;
+    color: var(--muted-text);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .dash-sub strong {
+    color: var(--ink-black);
+  }
+
+  .dash-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding-top: var(--space-sm);
+    border-top: var(--border-rule);
+  }
+
+  .dash-meta-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .dash-meta-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted-text);
+  }
+
+  .dash-meta-value {
+    font-size: 0.85rem;
+    color: var(--ink-black);
+  }
+
+  code.dash-meta-value {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.75rem;
+    background: var(--paper-white);
+    padding: 0.15rem 0.4rem;
+    border-radius: 0.25rem;
+  }
+
+  .admin-footer {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .admin-footer a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .admin-footer a:hover {
+    color: var(--pure-white);
+  }
+</style>
